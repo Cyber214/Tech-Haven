@@ -14,6 +14,11 @@ router.post('/', checkAuth, devicesCtrl.create)
 
 router.get('/', checkAuth, devicesCtrl.index)
 
+router.get('/:deviceId', checkAuth, devicesCtrl.show)
+
+router.put('/:deviceId', checkAuth, devicesCtrl.update)
+
+
 export {
   router
 }
