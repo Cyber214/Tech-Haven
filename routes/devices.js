@@ -1,6 +1,6 @@
 import { Router } from "express"
-import * as deviceCtrl from '../controllers/devices.js'
-import { decodeUserFromToken, checkAuth } from "../middleware/auth"
+import * as devicesCtrl from '../controllers/devices.js'
+import { decodeUserFromToken, checkAuth } from "../middleware/auth.js"
 
 const router = Router()
 
@@ -10,7 +10,7 @@ const router = Router()
 // ========= Protected Routes ========= 
 router.use(decodeUserFromToken) 
 
-router.post('/', checkAuth, deviceCtrl.create)
+router.post('/', checkAuth, devicesCtrl.create)
 
 export {
   router
