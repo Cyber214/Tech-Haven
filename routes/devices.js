@@ -12,6 +12,8 @@ router.use(decodeUserFromToken)
 
 router.post('/', checkAuth, devicesCtrl.create)
 
+router.get('/', checkAuth, devicesCtrl.index)
+
 export {
   router
 }
