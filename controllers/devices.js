@@ -1,5 +1,5 @@
-import { Device } from "../models/device"
-import { Profile } from "../models/profile"
+import { Device } from "../models/device.js"
+import { Profile } from "../models/profile.js"
 
 async function create(req, res) {
   try {
