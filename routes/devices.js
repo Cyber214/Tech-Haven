@@ -18,6 +18,8 @@ router.get('/:deviceId', checkAuth, devicesCtrl.show)
 
 router.put('/:deviceId', checkAuth, devicesCtrl.update)
 
+router.delete('/:deviceId', checkAuth, devicesCtrl.delete)
+
 
 export {
   router
