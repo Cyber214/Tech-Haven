@@ -64,9 +64,29 @@ async function update(req, res) {
     res.status(500).json(error)
   }
 }
+
+async function deleteDevice(req, res) {
+  try {
+    const device = await Device.findById(req.params.deviceId)
+    if (device.author.equals(req.user.profile)) {
+      await Device.findByIdAndDelete(req.params.deviceId)
+      const profile = await Profile.findById(req.user.profile)
+      profile.devices.remove({ _id: req.params.deviceId })
+      await profile.save()
+      res.status(200).json(device)
+    } else {
+      res.status(500).json({error: 'Not Authorized'})
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
 export{
   create,
   index,
   show,
   update,
+  deleteDevice as delete,
 }
