@@ -47,7 +47,7 @@ async function show(req, res) {
 async function update(req, res) {
   try {
     const deviceToCheck = await Device.findById(req.params.deviceId)
-    // this protects devices to make sure the user is the creater
+    // protect devices by making sure the user is the owner
     if (deviceToCheck.author.equals(req.user.profile)) {
       console.log('author is a match')
       const device = await Device.findByIdAndUpdate(
@@ -83,7 +83,32 @@ async function deleteDevice(req, res) {
   }
 }
 
+async function createOffer(req, res) {
+  try {
+    // set the author as the profile user
+    req.body.author = req.user.profile
+    //find the device by Id
+    const device = await Device.findById(req.params.deviceId)
+    //push new offer
+    device.offers.push(req.body)
+    await device.save()
+    // Find the newly created offers
+    // send back that new offer without updating whole page
+    const newOffer= device.offers[device.offers.length - 1]
+    // find & append profile object to newOffer.author
+    const profile = await Profile.findById(req.user.profile)
+    newOffer.author = profile
+    // Respond with the newOffer
+    res.status(201).json(newOffer)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export{
+  createOffer,
+
+  //Device controller functions
   create,
   index,
   show,
