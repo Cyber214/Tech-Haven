@@ -105,7 +105,7 @@ async function createOffer(req, res) {
   }
 }
 
-const updateOffer= async (req, res) => {
+async function updateOffer(req, res) {
   try {
     const device = await Device.findById(req.params.deviceId)
     const offer = device.offers.id(req.body._id)
@@ -117,9 +117,22 @@ const updateOffer= async (req, res) => {
   }
 }
 
+async function deleteOffer(req, res) {
+  try {
+    const device = await Device.findById(req.params.deviceId)
+    device.offers.remove({ _id: req.params.offerId })
+    await device.save()
+    res.status(200).json(device)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
+
 export{
   createOffer,
   updateOffer,
+  deleteOffer,
 
   //Device controller functions
   create,
