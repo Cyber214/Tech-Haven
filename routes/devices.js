@@ -26,6 +26,8 @@ router.post('/:deviceId/offers', checkAuth, devicesCtrl.createOffer)
 
 router.put('/:deviceId/offers', checkAuth, devicesCtrl.updateOffer)
 
+router.delete('/:deviceId/offers/:offerId', checkAuth, devicesCtrl.deleteOffer)
+
 
 export {
   router
