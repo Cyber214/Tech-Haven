@@ -10,6 +10,7 @@ const router = Router()
 // ========= Protected Routes ========= 
 router.use(decodeUserFromToken) 
 
+// POST localhost:3001 /devices/
 router.post('/', checkAuth, devicesCtrl.create)
 
 router.get('/', checkAuth, devicesCtrl.index)
@@ -20,8 +21,10 @@ router.put('/:deviceId', checkAuth, devicesCtrl.update)
 
 router.delete('/:deviceId', checkAuth, devicesCtrl.delete)
 
-// POST /devices/:deviceId/offers
+// POST localhost:3001 /devices/:deviceId/offers
 router.post('/:deviceId/offers', checkAuth, devicesCtrl.createOffer)
+
+router.put('/:deviceId/offers', checkAuth, devicesCtrl.updateOffer)
 
 
 export {
