@@ -110,6 +110,7 @@ async function updateOffer(req, res) {
     const device = await Device.findById(req.params.deviceId)
     const offer = device.offers.id(req.body._id)
     offer.comment = req.body.comment
+    offer.value = req.body.value
     await device.save()
     res.status(200).json(device)
   } catch (err) {
