@@ -38,9 +38,9 @@ const deviceSchema = new Schema({
     required: true,
     enum: ['New', 'Used', 'Refurbished'],
   },
-  damage: Boolean,
-  scratches: Boolean,
-  cracks: Boolean,
+  damage: { type: Boolean},
+  scratches: { type: Boolean },
+  cracks: { type: Boolean },
   author: {type: Schema.Types.ObjectId, ref: 'Profile'},
   offers: [offerSchema]
 }, {timestamps: true})
